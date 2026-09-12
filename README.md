@@ -1,0 +1,2 @@
+# Classification-model-to-detect-prevalence-of-diabetes-on-Pima-Indian-Diabetes-dataset
+This project aims to develop a classification model to classify an individual as Diabetic(1) or non-Diabetic(0) based on a set of predictor variables. I have used Logistic regression, Probit regression, RandomForest for fitting and prediction. Further, confusion matrix and accuracy score have been used as metrics for evaluating model performance. 
