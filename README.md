@@ -29,17 +29,21 @@ The dataset is loaded using pandas.
 The first 8 columns are used as predictor variables (X),
 and Outcome is used as the response variable (y).
 
-### 3. Standardization
+### 3. Detection of Multicollinearity
+We use correlation matrix to detect whether predictors are correlated.
+None of them turn out to be significantly correlated with each other
+
+### 4. Standardization
 The predictor variables are standardized using StandardScaler.
 
-### 4. Train-Test Split
+### 5. Train-Test Split
 The data is divided into training and testing sets.
 
-### 5. Classification Model
+### 6. Classification Model
 A classification model is fitted using the training data.
 We have used Logistic regression,Probit Regression and Random Forest 
 
-### 6. Model Evaluation
+### 7. Model Evaluation
 The model is evaluated using:
 - Accuracy score
 - Confusion Matrix
@@ -47,5 +51,5 @@ The model is evaluated using:
 
 To reduce variabilty associated with the models k-fold cross validation is performed.
 
-### 7.Conclusion
+### 8.Conclusion
 Random Forest classifies the outcome of being diabetic or non-diabetic the best with accuracy score of 79.8%
