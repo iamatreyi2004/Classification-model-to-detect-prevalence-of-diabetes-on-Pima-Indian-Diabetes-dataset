@@ -1,67 +1,51 @@
-import pandas as pd
-from sklearn.metrics import accuracy_score, confusion_matrix, classification_report
-import statsmodels.api as sm
-data=pd.read_csv("Pima_data.csv")# Loading dataset in python
-data
-X=data.iloc[:,0:8]#Extracting features
-y=data.iloc[:,8]#Extracting response
-## Standardize the predictor variables
-from sklearn.preprocessing import StandardScaler
-sc=StandardScaler()
-X=sc.fit_transform(X)
-#Dividing data into train and test set
-from sklearn.model_selection import train_test_split
-X_train,X_test,y_train,y_test=train_test_split(X,y,test_size=0.2,random_state=1)
+# Classification Model to Detect Diabetes
 
-#Fitting Logistic regression 
-from sklearn.linear_model import LogisticRegression
-lm = LogisticRegression(random_state=0)
-lm.fit(X_train, y_train)
+## Objective
+The objective of this project is to develop a classification model
+to classify an individual as Diabetic (1) or Non-Diabetic (0)
+using the Pima Indian Diabetes Dataset.
 
-y_pred = lm.predict(X_test)
-print(y_pred,y_test)
+## Dataset
+The dataset contains information about individuals such as:
+- Pregnancies
+- Glucose
+- Blood Pressure
+- Skin Thickness
+- Insulin
+- BMI
+- Diabetes Pedigree Function
+- Age
 
-cm=confusion_matrix(y_test, y_pred)
-print(cm)
-print("Accuracy:", accuracy_score(y_test, y_pred))
-#Performing k-fold cross-validation
-from sklearn.model_selection import cross_val_score
-accuracies=cross_val_score(estimator=lm,X=X_train,y=y_train,cv=10) #10 folds cross validation
-print("Accuracy {:2f} %".format(accuracies.mean()*100))
-print("Standard Deviation {:2f}".format(accuracies.std()))
+The response variable is Outcome:
+- 1 = Diabetic
+- 0 = Non-Diabetic
 
+## Methodology
 
+### 1. Data Loading
+The dataset is loaded using pandas.
 
-#Fitting Probit regression
+### 2. Feature and Response Selection
+The first 8 columns are used as predictor variables (X),
+and Outcome is used as the response variable (y).
 
+### 3. Standardization
+The predictor variables are standardized using StandardScaler.
 
-model=sm.Probit(y_train, X_train)
-result=model.fit()
-print(result.summary())
-y_prob = result.predict(X_test)
-y_pred = (y_prob >= 0.5).astype(int)
-print("Accuracy:", accuracy_score(y_test, y_pred))
+### 4. Train-Test Split
+The data is divided into training and testing sets.
 
+### 5. Classification Model
+A classification model is fitted using the training data.
+We have used Logistic regression,Probit Regression and Random Forest 
 
+### 6. Model Evaluation
+The model is evaluated using:
+- Accuracy score
+- Confusion Matrix
+- Classification Report
 
-# Fitting Random Forest
+To reduce variabilty associated with the models k-fold cross validation is performed.
 
-from sklearn.ensemble import RandomForestClassifier
-
-rf = RandomForestClassifier(
-    n_estimators=100,
-    random_state=42
-)
-
-# Step 6: Train the model
-rf.fit(X_train, y_train)
-
-# Step 7: Make predictions
-y_pred = rf.predict(X_test)
-
-# Step 8: Evaluate the model
-print("Accuracy:", accuracy_score(y_test, y_pred))
-print("\nConfusion Matrix")
-print(confusion_matrix(y_test, y_pred))
-print("\nClassification Report")
-print(classification_report(y_test, y_pred))
+### 7.Conclusion
+Random Forest classifies the outcome of being diabetic or non-diabetic the best with accuracy score of 79.8%
