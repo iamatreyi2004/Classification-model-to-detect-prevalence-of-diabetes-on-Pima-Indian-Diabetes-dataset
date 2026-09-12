@@ -1,4 +1,4 @@
-# Classification Model to Detect Diabetes
+# Classification Model to Detect Prevalence of Diabetes
 
 ## Objective
 The objective of this project is to develop a classification model
